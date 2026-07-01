@@ -19,6 +19,7 @@ import { Route as AuthenticatedAppIntegracaoRouteImport } from './routes/_authen
 import { Route as AuthenticatedAppFinanceiroRouteImport } from './routes/_authenticated/_app.financeiro'
 import { Route as AuthenticatedAppDashboardRouteImport } from './routes/_authenticated/_app.dashboard'
 import { Route as AuthenticatedAppConversasRouteImport } from './routes/_authenticated/_app.conversas'
+import { Route as AuthenticatedAppConfiguracoesRouteImport } from './routes/_authenticated/_app.configuracoes'
 import { Route as ApiPublicWebhookInstanceRouteImport } from './routes/api/public/webhook.$instance'
 
 const AuthRoute = AuthRouteImport.update({
@@ -73,6 +74,12 @@ const AuthenticatedAppConversasRoute =
     path: '/conversas',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
+const AuthenticatedAppConfiguracoesRoute =
+  AuthenticatedAppConfiguracoesRouteImport.update({
+    id: '/configuracoes',
+    path: '/configuracoes',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
 const ApiPublicWebhookInstanceRoute =
   ApiPublicWebhookInstanceRouteImport.update({
     id: '/api/public/webhook/$instance',
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/conectar': typeof AuthenticatedConectarRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/conversas': typeof AuthenticatedAppConversasRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
   '/financeiro': typeof AuthenticatedAppFinanceiroRoute
@@ -96,6 +104,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/conectar': typeof AuthenticatedConectarRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/conversas': typeof AuthenticatedAppConversasRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
   '/financeiro': typeof AuthenticatedAppFinanceiroRoute
@@ -110,6 +119,7 @@ export interface FileRoutesById {
   '/_authenticated/_app': typeof AuthenticatedAppRouteWithChildren
   '/_authenticated/conectar': typeof AuthenticatedConectarRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/_app/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/_authenticated/_app/conversas': typeof AuthenticatedAppConversasRoute
   '/_authenticated/_app/dashboard': typeof AuthenticatedAppDashboardRoute
   '/_authenticated/_app/financeiro': typeof AuthenticatedAppFinanceiroRoute
@@ -123,6 +133,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/conectar'
     | '/onboarding'
+    | '/configuracoes'
     | '/conversas'
     | '/dashboard'
     | '/financeiro'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/conectar'
     | '/onboarding'
+    | '/configuracoes'
     | '/conversas'
     | '/dashboard'
     | '/financeiro'
@@ -147,6 +159,7 @@ export interface FileRouteTypes {
     | '/_authenticated/_app'
     | '/_authenticated/conectar'
     | '/_authenticated/onboarding'
+    | '/_authenticated/_app/configuracoes'
     | '/_authenticated/_app/conversas'
     | '/_authenticated/_app/dashboard'
     | '/_authenticated/_app/financeiro'
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppConversasRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/_app/configuracoes': {
+      id: '/_authenticated/_app/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof AuthenticatedAppConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
     '/api/public/webhook/$instance': {
       id: '/api/public/webhook/$instance'
       path: '/api/public/webhook/$instance'
@@ -244,6 +264,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAppRouteChildren {
+  AuthenticatedAppConfiguracoesRoute: typeof AuthenticatedAppConfiguracoesRoute
   AuthenticatedAppConversasRoute: typeof AuthenticatedAppConversasRoute
   AuthenticatedAppDashboardRoute: typeof AuthenticatedAppDashboardRoute
   AuthenticatedAppFinanceiroRoute: typeof AuthenticatedAppFinanceiroRoute
@@ -251,6 +272,7 @@ interface AuthenticatedAppRouteChildren {
 }
 
 const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
+  AuthenticatedAppConfiguracoesRoute: AuthenticatedAppConfiguracoesRoute,
   AuthenticatedAppConversasRoute: AuthenticatedAppConversasRoute,
   AuthenticatedAppDashboardRoute: AuthenticatedAppDashboardRoute,
   AuthenticatedAppFinanceiroRoute: AuthenticatedAppFinanceiroRoute,
