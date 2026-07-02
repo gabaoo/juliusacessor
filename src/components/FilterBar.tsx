@@ -20,9 +20,10 @@ interface Props {
   onChange: (f: TxFilters) => void;
   categories: Category[];
   showType?: boolean;
+  hideAdvanced?: boolean;
 }
 
-export function FilterBar({ filters, onChange, categories, showType = true }: Props) {
+export function FilterBar({ filters, onChange, categories, showType = true, hideAdvanced = false }: Props) {
   const set = (patch: Partial<TxFilters>) => onChange({ ...filters, ...patch });
 
   return (
@@ -69,34 +70,40 @@ export function FilterBar({ filters, onChange, categories, showType = true }: Pr
           </Select>
         </div>
       )}
-      <div className="space-y-1.5">
-        <Label className="text-xs">Valor mín.</Label>
-        <Input
-          type="number"
-          inputMode="decimal"
-          value={filters.minValor ?? ""}
-          onChange={(e) => set({ minValor: e.target.value ? Number(e.target.value) : undefined })}
-          placeholder="0"
-        />
-      </div>
-      <div className="space-y-1.5">
-        <Label className="text-xs">Valor máx.</Label>
-        <Input
-          type="number"
-          inputMode="decimal"
-          value={filters.maxValor ?? ""}
-          onChange={(e) => set({ maxValor: e.target.value ? Number(e.target.value) : undefined })}
-          placeholder="∞"
-        />
-      </div>
-      <div className="space-y-1.5 sm:col-span-2 lg:col-span-1">
-        <Label className="text-xs">Busca (descrição)</Label>
-        <Input
-          value={filters.search ?? ""}
-          onChange={(e) => set({ search: e.target.value || undefined })}
-          placeholder="Palavra-chave..."
-        />
-      </div>
+      {!hideAdvanced && (
+        <div className="space-y-1.5">
+          <Label className="text-xs">Valor mín.</Label>
+          <Input
+            type="number"
+            inputMode="decimal"
+            value={filters.minValor ?? ""}
+            onChange={(e) => set({ minValor: e.target.value ? Number(e.target.value) : undefined })}
+            placeholder="0"
+          />
+        </div>
+      )}
+      {!hideAdvanced && (
+        <div className="space-y-1.5">
+          <Label className="text-xs">Valor máx.</Label>
+          <Input
+            type="number"
+            inputMode="decimal"
+            value={filters.maxValor ?? ""}
+            onChange={(e) => set({ maxValor: e.target.value ? Number(e.target.value) : undefined })}
+            placeholder="∞"
+          />
+        </div>
+      )}
+      {!hideAdvanced && (
+        <div className="space-y-1.5 sm:col-span-2 lg:col-span-1">
+          <Label className="text-xs">Busca (descrição)</Label>
+          <Input
+            value={filters.search ?? ""}
+            onChange={(e) => set({ search: e.target.value || undefined })}
+            placeholder="Palavra-chave..."
+          />
+        </div>
+      )}
       <div className="flex items-end">
         <Button
           variant="outline"

@@ -7,7 +7,6 @@ import {
   MessagesSquare,
   Wallet,
   Settings,
-  Plug,
   Moon,
   Sun,
   LogOut,
@@ -25,7 +24,6 @@ const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/conversas", label: "Conversas", icon: MessagesSquare },
   { to: "/financeiro", label: "Financeiro", icon: Wallet },
-  { to: "/integracao", label: "Integração", icon: Plug },
   { to: "/configuracoes", label: "Configurações", icon: Settings },
 ] as const;
 

@@ -20,6 +20,8 @@ import {
   YAxis,
   CartesianGrid,
   Legend,
+  AreaChart,
+  Area,
 } from "recharts";
 import { ArrowDownRight, ArrowUpRight, Wallet, Download, TrendingUp } from "lucide-react";
 
@@ -93,7 +95,7 @@ function Dashboard() {
         </Button>
       </div>
 
-      <FilterBar filters={filters} onChange={setFilters} categories={categories} />
+      <FilterBar filters={filters} onChange={setFilters} categories={categories} hideAdvanced />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <SummaryCard
@@ -163,6 +165,42 @@ function Dashboard() {
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Gastos diários</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {byDay.some((d) => d.despesa > 0) ? (
+            <ResponsiveContainer width="100%" height={240}>
+              <AreaChart data={byDay} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="gradDespesa" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--expense)" stopOpacity={0.25} />
+                    <stop offset="95%" stopColor="var(--expense)" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                <XAxis dataKey="label" fontSize={12} stroke="var(--muted-foreground)" />
+                <YAxis fontSize={12} stroke="var(--muted-foreground)" width={52} />
+                <Tooltip formatter={(v: number) => formatCurrency(v, currency)} />
+                <Area
+                  type="monotone"
+                  dataKey="despesa"
+                  name="Gastos"
+                  stroke="var(--expense)"
+                  strokeWidth={2}
+                  fill="url(#gradDespesa)"
+                  dot={{ r: 3, fill: "var(--expense)" }}
+                  activeDot={{ r: 5 }}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          ) : (
+            <EmptyChart />
+          )}
+        </CardContent>
+      </Card>
 
       {!isLoading && !txns.length && (
         <Card>
