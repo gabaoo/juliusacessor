@@ -6,6 +6,7 @@ import { FilterBar } from "@/components/FilterBar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatCurrency, firstDayOfMonthISO, lastDayOfMonthISO, formatDate } from "@/lib/format";
+import { computeTotals, groupByCategory, groupByDay } from "@/lib/finance";
 import { exportToCsv } from "@/lib/csv";
 import {
   ResponsiveContainer,
@@ -47,40 +48,12 @@ function Dashboard() {
   const { data: txns = [], isLoading } = useTransactions(instance?.id, filters);
   const currency = profile?.currency ?? "BRL";
 
-  const totals = useMemo(() => {
-    let receitas = 0;
-    let despesas = 0;
-    for (const t of txns) {
-      if (t.tipo === "receita") receitas += Number(t.valor);
-      else despesas += Number(t.valor);
-    }
-    return { receitas, despesas, saldo: receitas - despesas };
-  }, [txns]);
-
-  const byCategory = useMemo(() => {
-    const map = new Map<string, number>();
-    for (const t of txns) {
-      if (t.tipo !== "despesa") continue;
-      const key = t.categoria || "Sem categoria";
-      map.set(key, (map.get(key) ?? 0) + Number(t.valor));
-    }
-    return Array.from(map.entries())
-      .map(([name, value]) => ({ name, value }))
-      .sort((a, b) => b.value - a.value);
-  }, [txns]);
-
-  const byDay = useMemo(() => {
-    const map = new Map<string, { data: string; receita: number; despesa: number }>();
-    for (const t of txns) {
-      const cur = map.get(t.data) ?? { data: t.data, receita: 0, despesa: 0 };
-      if (t.tipo === "receita") cur.receita += Number(t.valor);
-      else cur.despesa += Number(t.valor);
-      map.set(t.data, cur);
-    }
-    return Array.from(map.values())
-      .sort((a, b) => a.data.localeCompare(b.data))
-      .map((d) => ({ ...d, label: formatDate(d.data).slice(0, 5) }));
-  }, [txns]);
+  const totals = useMemo(() => computeTotals(txns), [txns]);
+  const byCategory = useMemo(() => groupByCategory(txns, "despesa"), [txns]);
+  const byDay = useMemo(
+    () => groupByDay(txns).map((d) => ({ ...d, label: formatDate(d.data).slice(0, 5) })),
+    [txns],
+  );
 
   function handleExport() {
     exportToCsv(

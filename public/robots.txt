@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /$
+Allow: /auth
+Disallow: /dashboard
+Disallow: /financeiro
+Disallow: /conversas
+Disallow: /integracao
+Disallow: /configuracoes
+Disallow: /onboarding
+Disallow: /conectar
+Disallow: /api/
