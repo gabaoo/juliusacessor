@@ -139,7 +139,8 @@ src/
 │   ├── auth.tsx                    # login / cadastro
 │   ├── sitemap[.]xml.ts            # sitemap
 │   ├── api/public/
-│   │   └── webhook.$instance.ts    # endpoint público autenticado do N8N
+│   │   ├── webhook.$instance.ts    # endpoint público autenticado do N8N
+│   │   └── instance-config.$instance.ts  # automação: resolve webhook_secret por nome (x-master-key)
 │   └── _authenticated/             # subárvore protegida (gate de sessão)
 │       ├── route.tsx               # guarda de autenticação (ssr:false)
 │       ├── onboarding.tsx          # configuração inicial da instância
