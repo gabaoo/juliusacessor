@@ -4,11 +4,11 @@ import { useServerFn } from "@tanstack/react-start";
 import { refreshConnection, regenerateQr } from "@/lib/evolution.functions";
 import { useInstance, signOutClean } from "@/hooks/use-app-data";
 import { useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Loader2, RefreshCw, CheckCircle2, Smartphone, LogOut } from "lucide-react";
+import { GuiaPraticoScrollable } from "@/components/GuiaPratico";
 
 export const Route = createFileRoute("/_authenticated/conectar")({
   component: Conectar,
@@ -84,7 +84,7 @@ function Conectar() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-background via-background to-accent/40 px-4 py-10">
-      <div className="w-full max-w-md">
+      <div className={`w-full transition-all duration-300 ${status === "connected" ? "max-w-2xl" : "max-w-md"}`}>
         <div className="mb-6 text-center">
           <h1 className="text-2xl font-bold">Conecte seu WhatsApp</h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -95,19 +95,24 @@ function Conectar() {
         <Card>
           <CardContent className="flex flex-col items-center gap-5 py-8">
             {status === "connected" ? (
-              <div className="flex flex-col items-center gap-4 text-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-success/15">
-                  <CheckCircle2 className="h-12 w-12 text-success" />
+              <div className="w-full space-y-5">
+                <div className="flex flex-col items-center gap-3 text-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-success/15">
+                    <CheckCircle2 className="h-9 w-9 text-success" />
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold">Tudo certo! 🎉</p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Seu WhatsApp está conectado ao Julius. Veja abaixo como começar a usar.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-lg font-semibold">Conectado! 🎉</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Seu WhatsApp está falando com o Julius.
-                  </p>
+                <div className="max-h-[60vh] overflow-hidden rounded-xl border bg-card">
+                  <GuiaPraticoScrollable
+                    onAction={() => navigate({ to: "/dashboard" })}
+                    actionLabel="Ir para o Dashboard"
+                  />
                 </div>
-                <Button className="w-full" onClick={() => navigate({ to: "/dashboard" })}>
-                  Ir para o painel
-                </Button>
               </div>
             ) : (
               <>

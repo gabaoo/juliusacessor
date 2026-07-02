@@ -3,6 +3,12 @@ import { useInstance, useProfile, signOutClean } from "@/hooks/use-app-data";
 import { useTheme } from "@/hooks/use-theme";
 import { Button } from "@/components/ui/button";
 import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import {
   LayoutDashboard,
   MessagesSquare,
   Wallet,
@@ -12,9 +18,11 @@ import {
   LogOut,
   Loader2,
   Menu,
+  HelpCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { GuiaPraticoScrollable } from "@/components/GuiaPratico";
 
 export const Route = createFileRoute("/_authenticated/_app")({
   component: AppLayout,
@@ -33,6 +41,7 @@ function AppLayout() {
   const { data: profile } = useProfile();
   const { theme, toggle } = useTheme();
   const [open, setOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
@@ -109,6 +118,16 @@ function AppLayout() {
           </div>
           <div className="mb-3 truncate text-sm font-medium">{profile?.display_name ?? "Você"}</div>
           <div className="flex gap-2">
+            {/* Botão de ajuda */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+              onClick={() => setHelpOpen(true)}
+              title="Guia prático de uso"
+            >
+              <HelpCircle className="h-4 w-4" />
+            </Button>
             <Button variant="ghost" size="sm" className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent" onClick={toggle}>
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
@@ -133,11 +152,36 @@ function AppLayout() {
             <Menu className="h-5 w-5" />
           </Button>
           <span className="font-semibold">Julius</span>
+          {/* Botão de ajuda no header mobile */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="ml-auto"
+            onClick={() => setHelpOpen(true)}
+            title="Guia prático de uso"
+          >
+            <HelpCircle className="h-5 w-5" />
+          </Button>
         </header>
         <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
           <Outlet />
         </main>
       </div>
+
+      {/* Sheet de ajuda */}
+      <Sheet open={helpOpen} onOpenChange={setHelpOpen}>
+        <SheetContent side="right" className="flex w-full flex-col p-0 sm:max-w-lg">
+          <SheetHeader className="shrink-0 border-b px-6 py-4">
+            <SheetTitle className="flex items-center gap-2 text-base">
+              <HelpCircle className="h-4 w-4 text-primary" />
+              Guia prático de uso
+            </SheetTitle>
+          </SheetHeader>
+          <div className="flex-1 overflow-hidden px-6 py-4">
+            <GuiaPraticoScrollable />
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
