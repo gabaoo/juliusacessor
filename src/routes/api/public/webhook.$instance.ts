@@ -62,7 +62,10 @@ export const Route = createFileRoute("/api/public/webhook/$instance")({
             .insert({ instance_id: instance.id, ...message })
             .select()
             .single();
-          if (msgErr) return Response.json({ error: msgErr.message }, { status: 500 });
+          if (msgErr) {
+            console.error("[webhook] message insert error:", msgErr);
+            return Response.json({ error: "Failed to record message" }, { status: 500 });
+          }
           results.message = msg.id;
         }
 
