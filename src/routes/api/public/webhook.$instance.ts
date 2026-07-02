@@ -19,11 +19,9 @@ export const Route = createFileRoute("/api/public/webhook/$instance")({
           return Response.json({ error: "Instance not found" }, { status: 404 });
         }
 
-        const url = new URL(request.url);
         const provided =
           request.headers.get("x-webhook-secret") ||
           request.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ||
-          url.searchParams.get("secret") ||
           "";
 
         if (!provided || provided !== instance.webhook_secret) {
