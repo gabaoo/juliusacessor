@@ -22,6 +22,7 @@ import { Route as AuthenticatedAppDashboardRouteImport } from './routes/_authent
 import { Route as AuthenticatedAppConversasRouteImport } from './routes/_authenticated/_app.conversas'
 import { Route as AuthenticatedAppConfiguracoesRouteImport } from './routes/_authenticated/_app.configuracoes'
 import { Route as ApiPublicWebhookInstanceRouteImport } from './routes/api/public/webhook.$instance'
+import { Route as ApiPublicInstanceConfigInstanceRouteImport } from './routes/api/public/instance-config.$instance'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -92,6 +93,12 @@ const ApiPublicWebhookInstanceRoute =
     path: '/api/public/webhook/$instance',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicInstanceConfigInstanceRoute =
+  ApiPublicInstanceConfigInstanceRouteImport.update({
+    id: '/api/public/instance-config/$instance',
+    path: '/api/public/instance-config/$instance',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedAppDashboardRoute
   '/financeiro': typeof AuthenticatedAppFinanceiroRoute
   '/integracao': typeof AuthenticatedAppIntegracaoRoute
+  '/api/public/instance-config/$instance': typeof ApiPublicInstanceConfigInstanceRoute
   '/api/public/webhook/$instance': typeof ApiPublicWebhookInstanceRoute
 }
 export interface FileRoutesByTo {
@@ -117,6 +125,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedAppDashboardRoute
   '/financeiro': typeof AuthenticatedAppFinanceiroRoute
   '/integracao': typeof AuthenticatedAppIntegracaoRoute
+  '/api/public/instance-config/$instance': typeof ApiPublicInstanceConfigInstanceRoute
   '/api/public/webhook/$instance': typeof ApiPublicWebhookInstanceRoute
 }
 export interface FileRoutesById {
@@ -133,6 +142,7 @@ export interface FileRoutesById {
   '/_authenticated/_app/dashboard': typeof AuthenticatedAppDashboardRoute
   '/_authenticated/_app/financeiro': typeof AuthenticatedAppFinanceiroRoute
   '/_authenticated/_app/integracao': typeof AuthenticatedAppIntegracaoRoute
+  '/api/public/instance-config/$instance': typeof ApiPublicInstanceConfigInstanceRoute
   '/api/public/webhook/$instance': typeof ApiPublicWebhookInstanceRoute
 }
 export interface FileRouteTypes {
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/financeiro'
     | '/integracao'
+    | '/api/public/instance-config/$instance'
     | '/api/public/webhook/$instance'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/financeiro'
     | '/integracao'
+    | '/api/public/instance-config/$instance'
     | '/api/public/webhook/$instance'
   id:
     | '__root__'
@@ -176,6 +188,7 @@ export interface FileRouteTypes {
     | '/_authenticated/_app/dashboard'
     | '/_authenticated/_app/financeiro'
     | '/_authenticated/_app/integracao'
+    | '/api/public/instance-config/$instance'
     | '/api/public/webhook/$instance'
   fileRoutesById: FileRoutesById
 }
@@ -184,6 +197,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicInstanceConfigInstanceRoute: typeof ApiPublicInstanceConfigInstanceRoute
   ApiPublicWebhookInstanceRoute: typeof ApiPublicWebhookInstanceRoute
 }
 
@@ -280,6 +294,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWebhookInstanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/instance-config/$instance': {
+      id: '/api/public/instance-config/$instance'
+      path: '/api/public/instance-config/$instance'
+      fullPath: '/api/public/instance-config/$instance'
+      preLoaderRoute: typeof ApiPublicInstanceConfigInstanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -322,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicInstanceConfigInstanceRoute: ApiPublicInstanceConfigInstanceRoute,
   ApiPublicWebhookInstanceRoute: ApiPublicWebhookInstanceRoute,
 }
 export const routeTree = rootRouteImport
