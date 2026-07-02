@@ -74,7 +74,62 @@ curl -X POST "http://localhost:8080/api/public/webhook/<nome-da-instancia>" \
 
 ---
 
-## Estrutura de pastas
+## Automação: obter o `webhook_secret` dinamicamente no N8N
+
+Para não precisar copiar/colar o `webhook_secret` de cada instância manualmente,
+existe um endpoint interno **exclusivo para automação server-to-server**:
+
+```
+POST /api/public/instance-config/<NOME_INSTANCIA>
+```
+
+- Protegido pelo segredo mestre **`N8N_MASTER_KEY`** (diferente do `webhook_secret`
+  por instância), enviado no header `x-master-key` (ou `Authorization: Bearer ...`).
+- O master key é validado **antes de qualquer leitura**.
+- Retorna apenas `{ instance_id, webhook_secret }` da instância pelo nome.
+- Não aparece em nenhuma UI. Se a instância não existir (ou a chave for inválida),
+  retorna 404/401 genéricos, sem detalhar o motivo — sem enumeração.
+
+### 1. Configurar o secret `N8N_MASTER_KEY` na Lovable
+
+Adicione o secret `N8N_MASTER_KEY` no ambiente da Lovable (Backend → Secrets).
+Use um valor aleatório e forte, guardado apenas no N8N e na Lovable.
+
+### 2. Chamar no N8N (nó HTTP Request antes do webhook principal)
+
+Configure um primeiro nó **HTTP Request** que busca o `webhook_secret` a partir do
+`NOME_INSTANCIA`:
+
+```
+Method:  POST
+URL:     https://<seu-app>.lovable.app/api/public/instance-config/{{ $json.NOME_INSTANCIA }}
+Headers: x-master-key: <valor do N8N_MASTER_KEY>
+```
+
+A resposta é:
+
+```json
+{ "instance_id": "…", "webhook_secret": "…" }
+```
+
+Em seguida, no nó HTTP Request que faz o POST principal para o webhook, use o valor
+retornado para alimentar o header dinamicamente:
+
+```
+URL:     https://<seu-app>.lovable.app/api/public/webhook/{{ $json.NOME_INSTANCIA }}
+Headers: x-webhook-secret: {{ $node["HTTP Request"].json.webhook_secret }}
+```
+
+### Testando manualmente
+
+```bash
+curl -X POST "http://localhost:8080/api/public/instance-config/<nome-da-instancia>" \
+  -H "x-master-key: <N8N_MASTER_KEY>"
+```
+
+---
+
+
 
 ```
 src/
