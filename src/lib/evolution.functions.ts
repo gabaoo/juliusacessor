@@ -10,6 +10,16 @@ function evoConfig() {
   return { url, key, configured: Boolean(url && key) };
 }
 
+async function fetchWithTimeout(input: string, init: RequestInit = {}, ms = 12000): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ms);
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 interface ProviderResult {
   qrcode: string | null;
   status: string;
@@ -48,7 +58,7 @@ async function providerCreate(instanceName: string): Promise<ProviderResult> {
     return { qrcode: null, status: "connecting", providerError: "provider_not_configured" };
   }
   try {
-    const res = await fetch(`${url}/instance/create`, {
+    const res = await fetchWithTimeout(`${url}/instance/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json", apikey: key! },
       body: JSON.stringify({
@@ -79,7 +89,7 @@ async function providerConnect(instanceName: string): Promise<ProviderResult> {
   const { url, key, configured } = evoConfig();
   if (!configured) return { qrcode: null, status: "connecting", providerError: "provider_not_configured" };
   try {
-    const res = await fetch(`${url}/instance/connect/${encodeURIComponent(instanceName)}`, {
+    const res = await fetchWithTimeout(`${url}/instance/connect/${encodeURIComponent(instanceName)}`, {
       headers: { apikey: key! },
     });
     const json = await res.json().catch(() => ({}));
@@ -93,7 +103,7 @@ async function providerState(instanceName: string): Promise<{ status: string; pr
   const { url, key, configured } = evoConfig();
   if (!configured) return { status: "connecting", providerError: "provider_not_configured" };
   try {
-    const res = await fetch(`${url}/instance/connectionState/${encodeURIComponent(instanceName)}`, {
+    const res = await fetchWithTimeout(`${url}/instance/connectionState/${encodeURIComponent(instanceName)}`, {
       headers: { apikey: key! },
     });
     const json = await res.json().catch(() => ({}));
