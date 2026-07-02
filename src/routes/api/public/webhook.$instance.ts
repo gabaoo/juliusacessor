@@ -49,7 +49,10 @@ export const Route = createFileRoute("/api/public/webhook/$instance")({
             .insert({ instance_id: instance.id, ...transaction })
             .select()
             .single();
-          if (txErr) return Response.json({ error: txErr.message }, { status: 500 });
+          if (txErr) {
+            console.error("[webhook] transaction insert error:", txErr);
+            return Response.json({ error: "Failed to record transaction" }, { status: 500 });
+          }
           results.transaction = tx.id;
         }
 
