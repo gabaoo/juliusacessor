@@ -3,15 +3,15 @@ import { parseValor } from "./finance";
 
 export const webhookPayloadSchema = z.object({
   tipo: z.enum(["receita", "despesa"]).optional(),
-  valor: z.union([z.number(), z.string()]).optional(),
-  categoria: z.string().nullable().optional(),
-  metodo_pagamento: z.string().nullable().optional(),
-  descricao: z.string().nullable().optional(),
-  data: z.string().nullable().optional(),
-  hora: z.string().nullable().optional(),
-  resposta_usuario: z.string().nullable().optional(),
-  mensagem: z.string().nullable().optional(),
-  conteudo: z.string().nullable().optional(),
+  valor: z.union([z.number(), z.string().max(50)]).optional(),
+  categoria: z.string().max(100).nullable().optional(),
+  metodo_pagamento: z.string().max(100).nullable().optional(),
+  descricao: z.string().max(500).nullable().optional(),
+  data: z.string().max(50).nullable().optional(),
+  hora: z.string().max(50).nullable().optional(),
+  resposta_usuario: z.string().max(2000).nullable().optional(),
+  mensagem: z.string().max(2000).nullable().optional(),
+  conteudo: z.string().max(2000).nullable().optional(),
 });
 
 export type WebhookPayload = z.infer<typeof webhookPayloadSchema>;
