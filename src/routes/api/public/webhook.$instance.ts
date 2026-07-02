@@ -19,11 +19,9 @@ export const Route = createFileRoute("/api/public/webhook/$instance")({
           return Response.json({ error: "Instance not found" }, { status: 404 });
         }
 
-        const url = new URL(request.url);
         const provided =
           request.headers.get("x-webhook-secret") ||
           request.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ||
-          url.searchParams.get("secret") ||
           "";
 
         if (!provided || provided !== instance.webhook_secret) {
@@ -51,7 +49,10 @@ export const Route = createFileRoute("/api/public/webhook/$instance")({
             .insert({ instance_id: instance.id, ...transaction })
             .select()
             .single();
-          if (txErr) return Response.json({ error: txErr.message }, { status: 500 });
+          if (txErr) {
+            console.error("[webhook] transaction insert error:", txErr);
+            return Response.json({ error: "Failed to record transaction" }, { status: 500 });
+          }
           results.transaction = tx.id;
         }
 
@@ -61,7 +62,10 @@ export const Route = createFileRoute("/api/public/webhook/$instance")({
             .insert({ instance_id: instance.id, ...message })
             .select()
             .single();
-          if (msgErr) return Response.json({ error: msgErr.message }, { status: 500 });
+          if (msgErr) {
+            console.error("[webhook] message insert error:", msgErr);
+            return Response.json({ error: "Failed to record message" }, { status: 500 });
+          }
           results.message = msg.id;
         }
 
