@@ -9,6 +9,23 @@ import { toast } from "sonner";
 import { Wallet, Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
+  head: () => ({
+    meta: [
+      { title: "Entrar no Julius — Acesse seu painel financeiro" },
+      {
+        name: "description",
+        content:
+          "Acesse ou crie sua conta no Julius para gerenciar suas finanças pessoais registradas pelo WhatsApp em um painel completo.",
+      },
+      { property: "og:title", content: "Entrar no Julius" },
+      {
+        property: "og:description",
+        content: "Acesse seu painel financeiro pessoal do Julius.",
+      },
+      { property: "og:url", content: "https://juliusacessor.lovable.app/auth" },
+    ],
+    links: [{ rel: "canonical", href: "https://juliusacessor.lovable.app/auth" }],
+  }),
   beforeLoad: async () => {
     const { data } = await supabase.auth.getSession();
     if (data.session) throw redirect({ to: "/dashboard" });
