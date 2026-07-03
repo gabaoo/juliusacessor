@@ -85,6 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Julius é seu assessor financeiro pessoal integrado ao WhatsApp. Registre receitas e despesas conversando e acompanhe tudo num painel completo.",
       },
       { name: "author", content: "Julius" },
+      { property: "og:site_name", content: "Julius" },
       { property: "og:title", content: "Julius — Assessoria financeira pessoal no WhatsApp" },
       {
         property: "og:description",
@@ -93,11 +94,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Julius — Assessoria financeira pessoal no WhatsApp" },
-      { name: "description", content: "Controle suas finanças pelo WhatsApp. Registre despesas e receitas, acompanhe gastos, organize seu orçamento e tenha uma gestão financeira pessoal simples." },
-      { property: "og:description", content: "Controle suas finanças pelo WhatsApp. Registre despesas e receitas, acompanhe gastos, organize seu orçamento e tenha uma gestão financeira pessoal simples." },
-      { name: "twitter:description", content: "Controle suas finanças pelo WhatsApp. Registre despesas e receitas, acompanhe gastos, organize seu orçamento e tenha uma gestão financeira pessoal simples." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7795b07d-4ee5-44ff-8cfa-48b96d55ed94/id-preview-eda93b54--9fe4e0c9-238c-4bce-b86e-927181d57a3a.lovable.app-1782945797274.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7795b07d-4ee5-44ff-8cfa-48b96d55ed94/id-preview-eda93b54--9fe4e0c9-238c-4bce-b86e-927181d57a3a.lovable.app-1782945797274.png" },
+      {
+        name: "twitter:description",
+        content: "Converse pelo WhatsApp, o Julius organiza suas finanças em um painel claro e em tempo real.",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
