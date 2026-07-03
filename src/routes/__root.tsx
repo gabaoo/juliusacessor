@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Julius — Assessoria financeira pessoal no WhatsApp" },
+      { title: "Julius Assessoria financeira pessoal no WhatsApp" },
       {
         name: "description",
         content:
@@ -86,14 +86,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Julius" },
       { property: "og:site_name", content: "Julius" },
-      { property: "og:title", content: "Julius — Assessoria financeira pessoal no WhatsApp" },
+      { property: "og:title", content: "Julius Assessoria financeira pessoal no WhatsApp" },
       {
         property: "og:description",
         content: "Converse pelo WhatsApp, o Julius organiza suas finanças em um painel claro e em tempo real.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Julius — Assessoria financeira pessoal no WhatsApp" },
+      { name: "twitter:title", content: "Julius Assessoria financeira pessoal no WhatsApp" },
       {
         name: "twitter:description",
         content: "Converse pelo WhatsApp, o Julius organiza suas finanças em um painel claro e em tempo real.",

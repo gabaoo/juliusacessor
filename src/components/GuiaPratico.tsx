@@ -154,7 +154,7 @@ export function GuiaPratico({ onAction, actionLabel = "Ir para o Dashboard" }: G
         <p className="text-sm text-muted-foreground">
           Quando você cita a <strong className="text-foreground">categoria</strong> e o{" "}
           <strong className="text-foreground">método de pagamento</strong> na mensagem, esses dados aparecem
-          direto nos filtros e gráficos do Dashboard — sem precisar editar depois.
+          direto nos filtros e gráficos do Dashboard sem precisar editar depois.
         </p>
 
         <div className="grid gap-3 sm:grid-cols-2">
@@ -223,7 +223,7 @@ export function GuiaPratico({ onAction, actionLabel = "Ir para o Dashboard" }: G
           Nada é permanente. Na tela de{" "}
           <strong className="text-foreground">Financeiro</strong>, você vê todos os lançamentos e pode{" "}
           <strong className="text-foreground">editar</strong> ou{" "}
-          <strong className="text-foreground">excluir</strong> qualquer um deles manualmente — sem depender do
+          <strong className="text-foreground">excluir</strong> qualquer um deles manualmente sem depender do
           WhatsApp.
         </p>
         <div className="flex items-center gap-2 rounded-xl border bg-muted/40 p-3 text-sm">

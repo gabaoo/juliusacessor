@@ -9,13 +9,13 @@ const OG_IMAGE =
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Julius — Assessor financeiro pessoal no WhatsApp" },
+      { title: "Julius - Assessor financeiro pessoal no WhatsApp" },
       {
         name: "description",
         content:
           "Registre receitas e despesas conversando pelo WhatsApp e acompanhe tudo num painel claro e em tempo real. O Julius organiza suas finanças por você.",
       },
-      { property: "og:title", content: "Julius — Assessor financeiro pessoal no WhatsApp" },
+      { property: "og:title", content: "Julius - Assessor financeiro pessoal no WhatsApp" },
       {
         property: "og:description",
         content:
@@ -110,7 +110,7 @@ function Landing() {
       </main>
 
       <footer className="mx-auto w-full max-w-5xl px-4 py-8 text-center text-xs text-muted-foreground">
-        Feito com carinho — e um pouquinho de inspiração no pai do Chris. 💸
+        Feito com carinho e um pouquinho de inspiração no pai do Chris. 💸
       </footer>
     </div>
   );

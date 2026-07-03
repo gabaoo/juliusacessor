@@ -1,9 +1,9 @@
-# Julius — Assessoria financeira pessoal via WhatsApp
+# Julius Assessoria financeira pessoal via WhatsApp
 
 Julius é um sistema web de assessoria financeira pessoal que funciona integrado ao
 WhatsApp através do N8N. O usuário conversa com um agente de IA pelo WhatsApp; cada
 mensagem é processada por um fluxo no N8N que extrai os dados financeiros e os envia,
-via webhook autenticado, para este sistema — que persiste tudo em banco de dados real
+via webhook autenticado, para este sistema que persiste tudo em banco de dados real
 e exibe em um painel completo, em tempo real.
 
 > O WhatsApp é o **canal de entrada**. O site é o **painel de controle e visualização**.
@@ -239,20 +239,20 @@ Registro honesto de como foi construir o Julius com IA.
 
 ### Onde a IA errou / alucinou e como foi corrigido
 - **Senha de teste vazada (HIBP)**: com a proteção contra senhas vazadas ligada, o cadastro
-  automatizado falhava com `422`. Diagnóstico só veio ao ler o erro de rede — trocar por
+  automatizado falhava com `422`. Diagnóstico só veio ao ler o erro de rede trocar por
   uma senha forte resolveu. Lição: erros "silenciosos" de auth muitas vezes são política
   de senha, não bug de código.
 - **Chamada à Evolution API travando a UI**: o botão de onboarding ficava eternamente em
   "carregando" porque o `fetch` ao provedor externo não tinha timeout. Corrigido com um
-  `fetchWithTimeout` (`AbortController`) em todas as chamadas — a UI sempre conclui, mesmo
+  `fetchWithTimeout` (`AbortController`) em todas as chamadas a UI sempre conclui, mesmo
   se o provedor estiver fora.
 - **Route tree do TanStack**: ao criar rotas novas, o typecheck acusava paths inexistentes
   até o `routeTree.gen.ts` ser regenerado (reinício do dev server). Não editar o arquivo
-  gerado — só criar os arquivos de rota e deixar o plugin regenerar.
+  gerado só criar os arquivos de rota e deixar o plugin regenerar.
 - **RLS em `transactions`/`messages`**: como essas tabelas se ligam ao usuário via
   `instance_id` (e não `user_id` direto), foi preciso uma função `owns_instance()`
   `SECURITY DEFINER` para as policies, em vez de comparar `auth.uid()` diretamente.
 
 ---
 
-Feito com carinho — e um pouquinho de inspiração no pai do Chris. 💸
+Feito com carinho e um pouquinho de inspiração no pai do Chris. 💸

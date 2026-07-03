@@ -11,7 +11,7 @@ import { Wallet, Loader2 } from "lucide-react";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Entrar no Julius — Acesse seu painel financeiro" },
+      { title: "Entrar no Julius - Acesse seu painel financeiro" },
       {
         name: "description",
         content:
@@ -83,7 +83,7 @@ function AuthPage() {
             <Wallet className="h-7 w-7" />
           </div>
           <h1 className="mt-4 text-3xl font-bold tracking-tight">
-            Julius — Seu assessor financeiro pessoal no WhatsApp
+            JuliusSeu assessor financeiro pessoal no WhatsApp
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Entre para acessar seu painel e organizar suas finanças.
@@ -157,7 +157,7 @@ function AuthPage() {
         </Card>
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
-          Feito com carinho — e um pouquinho de inspiração no pai do Chris. 💸
+          Feito com carinho e um pouquinho de inspiração no pai do Chris. 💸
         </p>
       </div>
     </div>
