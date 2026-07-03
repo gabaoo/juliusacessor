@@ -144,7 +144,10 @@ export const createInstance = createServerFn({ method: "POST" })
       })
       .select()
       .single();
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("[createInstance] insert error:", error);
+      throw new Error("Não foi possível criar a instância. Tente novamente.");
+    }
 
     const provider = await providerCreate(data.nome_instancia);
     await supabase.from("instances").update({ status: provider.status }).eq("id", inserted.id);
