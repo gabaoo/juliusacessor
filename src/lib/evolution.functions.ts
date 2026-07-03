@@ -68,7 +68,6 @@ async function providerCreate(instanceName: string): Promise<ProviderResult> {
         groupsIgnore: true,
         webhook: {
           url: FIXED_WEBHOOK_URL,
-          byEvents: true,
           base64: true,
           events: ["MESSAGES_UPSERT"],
         },
