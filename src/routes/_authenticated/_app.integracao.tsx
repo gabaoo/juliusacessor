@@ -13,6 +13,12 @@ import { toast } from "sonner";
 import { Copy, Eye, EyeOff, RefreshCw, Loader2, QrCode, Plug } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/_app/integracao")({
+  head: () => ({
+    meta: [
+      { title: "Integração — Julius" },
+      { name: "description", content: "Conecte o N8N e a Evolution API ao Julius para registrar lançamentos pelo WhatsApp." },
+    ],
+  }),
   component: Integracao,
 });
 

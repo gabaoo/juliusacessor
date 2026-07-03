@@ -26,6 +26,12 @@ import {
 import { ArrowDownRight, ArrowUpRight, Wallet, Download, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/_app/dashboard")({
+  head: () => ({
+    meta: [
+      { title: "Dashboard — Julius" },
+      { name: "description", content: "Resumo das suas receitas, despesas e saldos financeiros em tempo real." },
+    ],
+  }),
   component: Dashboard,
 });
 

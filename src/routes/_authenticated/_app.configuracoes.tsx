@@ -37,6 +37,12 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/_app/configuracoes")({
+  head: () => ({
+    meta: [
+      { title: "Configurações — Julius" },
+      { name: "description", content: "Gerencie sua conta, categorias, aparência e integração do Julius." },
+    ],
+  }),
   component: Configuracoes,
 });
 

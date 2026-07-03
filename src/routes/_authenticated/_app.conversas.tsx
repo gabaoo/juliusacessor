@@ -9,6 +9,12 @@ import { formatDateTime } from "@/lib/format";
 import { MessagesSquare, Search, Bot, User } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/_app/conversas")({
+  head: () => ({
+    meta: [
+      { title: "Conversas — Julius" },
+      { name: "description", content: "Histórico das mensagens trocadas com o Julius pelo WhatsApp." },
+    ],
+  }),
   component: Conversas,
 });
 
