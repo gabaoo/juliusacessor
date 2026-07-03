@@ -124,16 +124,18 @@ function AppLayout() {
               size="sm"
               className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent"
               onClick={() => setHelpOpen(true)}
+              aria-label="Guia prático de uso"
               title="Guia prático de uso"
             >
               <HelpCircle className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="sm" className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent" onClick={toggle}>
+            <Button variant="ghost" size="sm" aria-label="Alternar tema" className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent" onClick={toggle}>
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
             <Button
               variant="ghost"
               size="sm"
+              aria-label="Sair da conta"
               className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent"
               onClick={() => signOutClean(navigate)}
             >

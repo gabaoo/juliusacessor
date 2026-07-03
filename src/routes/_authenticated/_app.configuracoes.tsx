@@ -308,7 +308,7 @@ function CategoriesManager({ categories, userId }: { categories: Category[]; use
                   <SelectItem value="receita">Receita</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="ghost" size="icon" className="ml-auto" onClick={() => deleteCategory(c.id)}>
+              <Button variant="ghost" size="icon" aria-label={`Remover categoria ${c.nome}`} className="ml-auto" onClick={() => deleteCategory(c.id)}>
                 <Trash2 className="h-4 w-4 text-destructive" />
               </Button>
             </div>
