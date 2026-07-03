@@ -81,7 +81,8 @@ function Financeiro() {
       })
       .eq("id", editing.id);
     if (error) {
-      toast.error(error.message);
+      console.error("[transactions] update error:", error);
+      toast.error("Não foi possível atualizar o lançamento. Tente novamente.");
       return;
     }
     toast.success("Lançamento atualizado.");
@@ -93,7 +94,8 @@ function Financeiro() {
     if (!deleting) return;
     const { error } = await supabase.from("transactions").delete().eq("id", deleting.id);
     if (error) {
-      toast.error(error.message);
+      console.error("[transactions] delete error:", error);
+      toast.error("Não foi possível excluir o lançamento. Tente novamente.");
       return;
     }
     toast.success("Lançamento excluído.");

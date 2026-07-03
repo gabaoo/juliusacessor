@@ -119,7 +119,10 @@ function ContaTab() {
       .from("profiles")
       .update({ display_name: name, currency, timezone })
       .eq("id", profile!.id);
-    if (error) return toast.error(error.message);
+    if (error) {
+      console.error("[profiles] update error:", error);
+      return toast.error("Não foi possível salvar. Tente novamente.");
+    }
     toast.success("Preferências salvas.");
     qc.invalidateQueries({ queryKey: ["profile"] });
   }
@@ -216,7 +219,10 @@ function CategoriesManager({ categories, userId }: { categories: Category[]; use
       cor: newColor,
       tipo: newTipo,
     });
-    if (error) return toast.error(error.message);
+    if (error) {
+      console.error("[categories] insert error:", error);
+      return toast.error("Não foi possível criar a categoria. Tente novamente.");
+    }
     setNewName("");
     toast.success("Categoria criada.");
     qc.invalidateQueries({ queryKey: ["categories"] });
@@ -224,13 +230,19 @@ function CategoriesManager({ categories, userId }: { categories: Category[]; use
 
   async function updateCategory(id: string, patch: Partial<Category>) {
     const { error } = await supabase.from("categories").update(patch).eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) {
+      console.error("[categories] update error:", error);
+      return toast.error("Não foi possível atualizar a categoria. Tente novamente.");
+    }
     qc.invalidateQueries({ queryKey: ["categories"] });
   }
 
   async function deleteCategory(id: string) {
     const { error } = await supabase.from("categories").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) {
+      console.error("[categories] delete error:", error);
+      return toast.error("Não foi possível remover a categoria. Tente novamente.");
+    }
     toast.success("Categoria removida.");
     qc.invalidateQueries({ queryKey: ["categories"] });
   }
