@@ -9,6 +9,23 @@ import { toast } from "sonner";
 import { Wallet, Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
+  head: () => ({
+    meta: [
+      { title: "Entrar no Julius — Acesse seu painel financeiro" },
+      {
+        name: "description",
+        content:
+          "Acesse ou crie sua conta no Julius para gerenciar suas finanças pessoais registradas pelo WhatsApp em um painel completo.",
+      },
+      { property: "og:title", content: "Entrar no Julius" },
+      {
+        property: "og:description",
+        content: "Acesse seu painel financeiro pessoal do Julius.",
+      },
+      { property: "og:url", content: "https://juliusacessor.lovable.app/auth" },
+    ],
+    links: [{ rel: "canonical", href: "https://juliusacessor.lovable.app/auth" }],
+  }),
   beforeLoad: async () => {
     const { data } = await supabase.auth.getSession();
     if (data.session) throw redirect({ to: "/dashboard" });
@@ -65,9 +82,11 @@ function AuthPage() {
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg">
             <Wallet className="h-7 w-7" />
           </div>
-          <h1 className="mt-4 text-3xl font-bold tracking-tight">Julius</h1>
+          <h1 className="mt-4 text-3xl font-bold tracking-tight">
+            Julius — Seu assessor financeiro pessoal no WhatsApp
+          </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Seu assessor financeiro pessoal, direto do WhatsApp.
+            Entre para acessar seu painel e organizar suas finanças.
           </p>
         </div>
 

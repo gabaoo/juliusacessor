@@ -13,6 +13,12 @@ import { toast } from "sonner";
 import { Copy, Eye, EyeOff, RefreshCw, Loader2, QrCode, Plug } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/_app/integracao")({
+  head: () => ({
+    meta: [
+      { title: "Integração — Julius" },
+      { name: "description", content: "Conecte o N8N e a Evolution API ao Julius para registrar lançamentos pelo WhatsApp." },
+    ],
+  }),
   component: Integracao,
 });
 
@@ -105,7 +111,7 @@ function Integracao() {
             <Label>URL do webhook (endpoint que recebe os dados)</Label>
             <div className="flex gap-2">
               <Input readOnly value={webhookUrl} className="font-mono text-xs" />
-              <Button variant="outline" size="icon" onClick={() => copy(webhookUrl, "URL")}>
+              <Button variant="outline" size="icon" aria-label="Copiar URL do webhook" onClick={() => copy(webhookUrl, "URL")}>
                 <Copy className="h-4 w-4" />
               </Button>
             </div>
@@ -120,10 +126,10 @@ function Integracao() {
                 value={instance?.webhook_secret ?? ""}
                 className="font-mono text-xs"
               />
-              <Button variant="outline" size="icon" onClick={() => setRevealSecret((v) => !v)}>
+              <Button variant="outline" size="icon" aria-label={revealSecret ? "Ocultar secret" : "Mostrar secret"} onClick={() => setRevealSecret((v) => !v)}>
                 {revealSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
-              <Button variant="outline" size="icon" onClick={() => copy(instance?.webhook_secret ?? "", "Secret")}>
+              <Button variant="outline" size="icon" aria-label="Copiar webhook secret" onClick={() => copy(instance?.webhook_secret ?? "", "Secret")}>
                 <Copy className="h-4 w-4" />
               </Button>
             </div>

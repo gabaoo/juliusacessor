@@ -124,16 +124,18 @@ function AppLayout() {
               size="sm"
               className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent"
               onClick={() => setHelpOpen(true)}
+              aria-label="Guia prático de uso"
               title="Guia prático de uso"
             >
               <HelpCircle className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="sm" className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent" onClick={toggle}>
+            <Button variant="ghost" size="sm" aria-label="Alternar tema" className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent" onClick={toggle}>
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
             <Button
               variant="ghost"
               size="sm"
+              aria-label="Sair da conta"
               className="flex-1 text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent"
               onClick={() => signOutClean(navigate)}
             >
@@ -148,7 +150,7 @@ function AppLayout() {
       {/* Main */}
       <div className="flex-1 lg:pl-64">
         <header className="sticky top-0 z-20 flex items-center gap-3 border-b bg-background/80 px-4 py-3 backdrop-blur lg:hidden">
-          <Button variant="ghost" size="icon" onClick={() => setOpen(true)}>
+          <Button variant="ghost" size="icon" aria-label="Abrir menu" onClick={() => setOpen(true)}>
             <Menu className="h-5 w-5" />
           </Button>
           <span className="font-semibold">Julius</span>
@@ -158,6 +160,7 @@ function AppLayout() {
             size="icon"
             className="ml-auto"
             onClick={() => setHelpOpen(true)}
+            aria-label="Guia prático de uso"
             title="Guia prático de uso"
           >
             <HelpCircle className="h-5 w-5" />

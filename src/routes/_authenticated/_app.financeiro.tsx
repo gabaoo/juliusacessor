@@ -49,6 +49,12 @@ import { toast } from "sonner";
 import { Pencil, Trash2, Download } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/_app/financeiro")({
+  head: () => ({
+    meta: [
+      { title: "Financeiro — Julius" },
+      { name: "description", content: "Todos os seus lançamentos de receitas e despesas, prontos para revisar e exportar." },
+    ],
+  }),
   component: Financeiro,
 });
 
@@ -171,10 +177,10 @@ function Financeiro() {
                       </TableCell>
                       <TableCell>
                         <div className="flex justify-end gap-1">
-                          <Button variant="ghost" size="icon" onClick={() => setEditing(t)}>
+                          <Button variant="ghost" size="icon" aria-label="Editar lançamento" onClick={() => setEditing(t)}>
                             <Pencil className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="icon" onClick={() => setDeleting(t)}>
+                          <Button variant="ghost" size="icon" aria-label="Excluir lançamento" onClick={() => setDeleting(t)}>
                             <Trash2 className="h-4 w-4 text-destructive" />
                           </Button>
                         </div>
