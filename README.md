@@ -256,3 +256,24 @@ Registro honesto de como foi construir o Julius com IA.
 ---
 
 Feito com carinho e um pouquinho de inspiração no pai do Chris. 💸
+
+---
+
+## Integrações de agentes de IA (MCP)
+
+O Julius expõe um servidor **MCP (Model Context Protocol)** para que assistentes de
+IA (ChatGPT, Claude, Cursor, Codex, etc.) consultem seus dados financeiros com
+segurança, em seu nome.
+
+- **Endpoint:** `/mcp` (ex.: `https://juliusacessor.lovable.app/mcp`)
+- **Autenticação:** OAuth 2.1 via Lovable Cloud. Ao conectar, o cliente abre a tela de
+  consentimento; após aprovar, ele acessa apenas os seus dados (protegidos por RLS).
+- **Ferramentas disponíveis:**
+  - `financial_summary` — totais de receitas, despesas, saldo e principais categorias de gasto.
+  - `list_transactions` — lista de lançamentos, com filtros por tipo e período.
+  - `list_categories` — categorias do usuário.
+
+### Como conectar
+Adicione o servidor MCP no seu cliente de IA usando a URL `/mcp` do app. O cliente cuida
+do fluxo OAuth automaticamente (registro dinâmico + login + consentimento). Não é
+necessário copiar tokens manualmente.
