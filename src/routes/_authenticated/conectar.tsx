@@ -107,7 +107,7 @@ function Conectar() {
                     </p>
                   </div>
                 </div>
-                <div className="max-h-[60vh] overflow-hidden rounded-xl border bg-card">
+                <div className="h-[60vh] overflow-hidden rounded-xl border bg-card">
                   <GuiaPraticoScrollable
                     onAction={() => navigate({ to: "/dashboard" })}
                     actionLabel="Ir para o Dashboard"
