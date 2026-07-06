@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { INSTANCE_NAME_REGEX, INSTANCE_NAME_ERROR } from "@/lib/instance-name";
 
 const FIXED_WEBHOOK_URL = "https://webhook.dev.gabotics.com/webhook/meu-assessor";
 
