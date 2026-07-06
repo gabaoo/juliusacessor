@@ -10,23 +10,32 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedConectarRouteImport } from './routes/_authenticated/conectar'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/_app'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as AuthenticatedAppIntegracaoRouteImport } from './routes/_authenticated/_app.integracao'
 import { Route as AuthenticatedAppFinanceiroRouteImport } from './routes/_authenticated/_app.financeiro'
 import { Route as AuthenticatedAppDashboardRouteImport } from './routes/_authenticated/_app.dashboard'
 import { Route as AuthenticatedAppConversasRouteImport } from './routes/_authenticated/_app.conversas'
 import { Route as AuthenticatedAppConfiguracoesRouteImport } from './routes/_authenticated/_app.configuracoes'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as ApiPublicWebhookInstanceRouteImport } from './routes/api/public/webhook.$instance'
 import { Route as ApiPublicInstanceConfigInstanceRouteImport } from './routes/api/public/instance-config.$instance'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -57,6 +66,18 @@ const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/_app',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AuthenticatedAppIntegracaoRoute =
   AuthenticatedAppIntegracaoRouteImport.update({
     id: '/integracao',
@@ -87,6 +108,12 @@ const AuthenticatedAppConfiguracoesRoute =
     path: '/configuracoes',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicWebhookInstanceRoute =
   ApiPublicWebhookInstanceRouteImport.update({
     id: '/api/public/webhook/$instance',
@@ -103,9 +130,13 @@ const ApiPublicInstanceConfigInstanceRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/mcp': typeof McpRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/conectar': typeof AuthenticatedConectarRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/conversas': typeof AuthenticatedAppConversasRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
@@ -117,9 +148,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/mcp': typeof McpRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/conectar': typeof AuthenticatedConectarRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/conversas': typeof AuthenticatedAppConversasRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
@@ -133,10 +168,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/mcp': typeof McpRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_authenticated/_app': typeof AuthenticatedAppRouteWithChildren
   '/_authenticated/conectar': typeof AuthenticatedConectarRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/_authenticated/_app/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/_authenticated/_app/conversas': typeof AuthenticatedAppConversasRoute
   '/_authenticated/_app/dashboard': typeof AuthenticatedAppDashboardRoute
@@ -150,9 +189,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/mcp'
     | '/sitemap.xml'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/conectar'
     | '/onboarding'
+    | '/.mcp/invoke-tool/$tool'
     | '/configuracoes'
     | '/conversas'
     | '/dashboard'
@@ -164,9 +207,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/mcp'
     | '/sitemap.xml'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/conectar'
     | '/onboarding'
+    | '/.mcp/invoke-tool/$tool'
     | '/configuracoes'
     | '/conversas'
     | '/dashboard'
@@ -179,10 +226,14 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/mcp'
     | '/sitemap.xml'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/_authenticated/_app'
     | '/_authenticated/conectar'
     | '/_authenticated/onboarding'
+    | '/.mcp/invoke-tool/$tool'
     | '/_authenticated/_app/configuracoes'
     | '/_authenticated/_app/conversas'
     | '/_authenticated/_app/dashboard'
@@ -196,7 +247,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  McpRoute: typeof McpRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicInstanceConfigInstanceRoute: typeof ApiPublicInstanceConfigInstanceRoute
   ApiPublicWebhookInstanceRoute: typeof ApiPublicWebhookInstanceRoute
 }
@@ -208,6 +263,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -252,6 +314,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/_app/integracao': {
       id: '/_authenticated/_app/integracao'
       path: '/integracao'
@@ -286,6 +362,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/configuracoes'
       preLoaderRoute: typeof AuthenticatedAppConfiguracoesRouteImport
       parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/webhook/$instance': {
       id: '/api/public/webhook/$instance'
@@ -342,7 +425,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  McpRoute: McpRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicInstanceConfigInstanceRoute: ApiPublicInstanceConfigInstanceRoute,
   ApiPublicWebhookInstanceRoute: ApiPublicWebhookInstanceRoute,
 }
