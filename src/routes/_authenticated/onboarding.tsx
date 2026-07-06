@@ -95,18 +95,30 @@ function Onboarding() {
                   id="nome"
                   required
                   value={nome}
-                  onChange={(e) => setNome(e.target.value)}
+                  onChange={(e) => handleNomeChange(e.target.value)}
                   placeholder="meu-assessor"
+                  aria-invalid={!!nomeError}
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  spellCheck={false}
                 />
-                <p className="text-xs text-muted-foreground">Apenas letras, números, hífen e underline.</p>
+                {nomeError ? (
+                  <p className="text-xs text-destructive">{nomeError}</p>
+                ) : (
+                  <p className="text-xs text-muted-foreground">
+                    Apenas letras sem acento, números e hífens. Espaços e acentos são convertidos
+                    automaticamente.
+                  </p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="whatsapp">Número de WhatsApp</Label>
                 <Input
                   id="whatsapp"
                   required
+                  inputMode="numeric"
                   value={whatsapp}
-                  onChange={(e) => setWhatsapp(e.target.value)}
+                  onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, ""))}
                   placeholder="5511999999999"
                 />
                 <p className="text-xs text-muted-foreground">Com DDI e DDD, apenas números.</p>
