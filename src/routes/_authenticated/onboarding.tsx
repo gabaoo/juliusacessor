@@ -132,7 +132,7 @@ function Onboarding() {
                 </span>
               </div>
 
-              <Button type="submit" className="w-full" disabled={saving}>
+              <Button type="submit" className="w-full" disabled={saving || !!nomeError}>
                 {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Criar instância e conectar
               </Button>
