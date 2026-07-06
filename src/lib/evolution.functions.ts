@@ -121,10 +121,13 @@ export const createInstance = createServerFn({ method: "POST" })
         nome_instancia: z
           .string()
           .trim()
-          .min(3, "Nome muito curto")
-          .max(60)
-          .regex(/^[a-zA-Z0-9_-]+$/, "Use apenas letras, números, - e _"),
-        whatsapp_number: z.string().trim().min(8).max(20),
+          .min(3, "O nome da instância deve ter ao menos 3 caracteres.")
+          .max(60, "O nome da instância é muito longo (máx. 60 caracteres).")
+          .regex(INSTANCE_NAME_REGEX, INSTANCE_NAME_ERROR),
+        whatsapp_number: z
+          .string()
+          .trim()
+          .regex(/^\d{8,20}$/, "O número de WhatsApp deve conter apenas dígitos (DDI + DDD + número)."),
       })
       .parse(d),
   )
