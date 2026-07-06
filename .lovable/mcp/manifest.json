@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://rexvxkonxauvzvrugrtb.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "julius-mcp",
+      "version": "0.1.0",
+      "title": "Julius Finance MCP"
+    },
+    "tools": [
+      {
+        "name": "financial_summary",
+        "title": "Financial summary",
+        "description": "Summarize the signed-in user's finances: total income, expenses, balance, and top expense categories for an optional date range.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "string",
+              "description": "Start date (inclusive), format YYYY-MM-DD."
+            },
+            "to": {
+              "type": "string",
+              "description": "End date (inclusive), format YYYY-MM-DD."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_transactions",
+        "title": "List transactions",
+        "description": "List the signed-in user's financial transactions (receitas/despesas), optionally filtered by type and date range.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "tipo": {
+              "type": "string",
+              "enum": [
+                "receita",
+                "despesa"
+              ],
+              "description": "Filter by transaction type: 'receita' (income) or 'despesa' (expense)."
+            },
+            "from": {
+              "type": "string",
+              "description": "Start date (inclusive), format YYYY-MM-DD."
+            },
+            "to": {
+              "type": "string",
+              "description": "End date (inclusive), format YYYY-MM-DD."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max rows to return (default 50, max 200)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_categories",
+        "title": "List categories",
+        "description": "List the signed-in user's transaction categories, optionally filtered by type.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "tipo": {
+              "type": "string",
+              "enum": [
+                "receita",
+                "despesa"
+              ],
+              "description": "Filter categories by type: 'receita' or 'despesa'."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
