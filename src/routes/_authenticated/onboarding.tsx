@@ -24,13 +24,30 @@ function Onboarding() {
   const [nome, setNome] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [saving, setSaving] = useState(false);
+  const [nomeError, setNomeError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isLoading && instance) navigate({ to: "/conectar" });
   }, [isLoading, instance, navigate]);
 
+  function handleNomeChange(value: string) {
+    const sanitized = sanitizeInstanceName(value);
+    setNome(sanitized);
+    setNomeError(sanitized.length > 0 ? validateInstanceName(sanitized) : null);
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const nomeErr = validateInstanceName(nome);
+    if (nomeErr) {
+      setNomeError(nomeErr);
+      toast.error(nomeErr);
+      return;
+    }
+    if (!/^\d{8,20}$/.test(whatsapp)) {
+      toast.error("O número de WhatsApp deve conter apenas dígitos (DDI + DDD + número).");
+      return;
+    }
     setSaving(true);
     try {
       const res = await create({ data: { nome_instancia: nome.trim(), whatsapp_number: whatsapp.trim() } });
