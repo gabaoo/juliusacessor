@@ -25,6 +25,7 @@ import { Route as AuthenticatedAppDashboardRouteImport } from './routes/_authent
 import { Route as AuthenticatedAppConversasRouteImport } from './routes/_authenticated/_app.conversas'
 import { Route as AuthenticatedAppConfiguracoesRouteImport } from './routes/_authenticated/_app.configuracoes'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as ApiPublicWebhookInstanceRouteImport } from './routes/api/public/webhook.$instance'
 import { Route as ApiPublicInstanceConfigInstanceRouteImport } from './routes/api/public/instance-config.$instance'
 
@@ -114,6 +115,11 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicWebhookInstanceRoute =
   ApiPublicWebhookInstanceRouteImport.update({
     id: '/api/public/webhook/$instance',
@@ -136,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/conectar': typeof AuthenticatedConectarRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/conversas': typeof AuthenticatedAppConversasRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/conectar': typeof AuthenticatedConectarRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/conversas': typeof AuthenticatedAppConversasRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/_authenticated/_app': typeof AuthenticatedAppRouteWithChildren
   '/_authenticated/conectar': typeof AuthenticatedConectarRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/_authenticated/_app/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/_authenticated/_app/conversas': typeof AuthenticatedAppConversasRoute
@@ -195,6 +204,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/conectar'
     | '/onboarding'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/configuracoes'
     | '/conversas'
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/conectar'
     | '/onboarding'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/configuracoes'
     | '/conversas'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/_authenticated/_app'
     | '/_authenticated/conectar'
     | '/_authenticated/onboarding'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/_authenticated/_app/configuracoes'
     | '/_authenticated/_app/conversas'
@@ -251,6 +263,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicInstanceConfigInstanceRoute: typeof ApiPublicInstanceConfigInstanceRoute
   ApiPublicWebhookInstanceRoute: typeof ApiPublicWebhookInstanceRoute
@@ -370,6 +383,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/webhook/$instance': {
       id: '/api/public/webhook/$instance'
       path: '/api/public/webhook/$instance'
@@ -430,6 +450,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicInstanceConfigInstanceRoute: ApiPublicInstanceConfigInstanceRoute,
   ApiPublicWebhookInstanceRoute: ApiPublicWebhookInstanceRoute,
