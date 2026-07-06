@@ -78,20 +78,20 @@ function Integracao() {
           </CardTitle>
           <CardDescription>Instância: {instance?.nome_instancia}</CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-wrap items-center justify-between gap-3">
+        <CardContent className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
             <span className={`inline-block h-2.5 w-2.5 rounded-full ${connected ? "bg-success" : "bg-muted-foreground/50"}`} />
             <Badge variant={connected ? "default" : "secondary"}>
               {connected ? "Conectada" : "Desconectada"}
             </Badge>
           </div>
-          <div className="flex gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:flex">
             <Button variant="outline" size="sm" onClick={check} disabled={checking}>
               {checking ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
               Verificar
             </Button>
             <Button variant="outline" size="sm" onClick={() => navigate({ to: "/conectar" })}>
-              <QrCode className="mr-2 h-4 w-4" /> Reconectar (novo QR)
+              <QrCode className="mr-2 h-4 w-4" /> <span className="truncate">Reconectar</span>
             </Button>
           </div>
         </CardContent>
@@ -110,8 +110,8 @@ function Integracao() {
           <div className="space-y-1.5">
             <Label>URL do webhook (endpoint que recebe os dados)</Label>
             <div className="flex gap-2">
-              <Input readOnly value={webhookUrl} className="font-mono text-xs" />
-              <Button variant="outline" size="icon" aria-label="Copiar URL do webhook" onClick={() => copy(webhookUrl, "URL")}>
+              <Input readOnly value={webhookUrl} className="min-w-0 flex-1 font-mono text-xs" />
+              <Button variant="outline" size="icon" className="shrink-0" aria-label="Copiar URL do webhook" onClick={() => copy(webhookUrl, "URL")}>
                 <Copy className="h-4 w-4" />
               </Button>
             </div>
@@ -124,12 +124,12 @@ function Integracao() {
                 readOnly
                 type={revealSecret ? "text" : "password"}
                 value={instance?.webhook_secret ?? ""}
-                className="font-mono text-xs"
+                className="min-w-0 flex-1 font-mono text-xs"
               />
-              <Button variant="outline" size="icon" aria-label={revealSecret ? "Ocultar secret" : "Mostrar secret"} onClick={() => setRevealSecret((v) => !v)}>
+              <Button variant="outline" size="icon" className="shrink-0" aria-label={revealSecret ? "Ocultar secret" : "Mostrar secret"} onClick={() => setRevealSecret((v) => !v)}>
                 {revealSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
-              <Button variant="outline" size="icon" aria-label="Copiar webhook secret" onClick={() => copy(instance?.webhook_secret ?? "", "Secret")}>
+              <Button variant="outline" size="icon" className="shrink-0" aria-label="Copiar webhook secret" onClick={() => copy(instance?.webhook_secret ?? "", "Secret")}>
                 <Copy className="h-4 w-4" />
               </Button>
             </div>
