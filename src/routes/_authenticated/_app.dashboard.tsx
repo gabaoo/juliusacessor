@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useInstance, useProfile, useCategories } from "@/hooks/use-app-data";
 import { useTransactions, type TxFilters } from "@/hooks/use-transactions";
 import { FilterBar } from "@/components/FilterBar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatCurrency, firstDayOfMonthISO, lastDayOfMonthISO, formatDate } from "@/lib/format";
 import { computeTotals, groupByCategory, groupByDay } from "@/lib/finance";
