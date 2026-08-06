@@ -53,6 +53,11 @@ export const Route = createFileRoute("/_authenticated/_app/financeiro")({
     meta: [
       { title: "Financeiro — Julius" },
       { name: "description", content: "Todos os seus lançamentos de receitas e despesas, prontos para revisar e exportar." },
+      { property: "og:title", content: "Lançamentos financeiros — Julius" },
+      {
+        property: "og:description",
+        content: "Revise, filtre, edite e exporte cada receita e despesa registrada pelo WhatsApp.",
+      },
     ],
   }),
   component: Financeiro,

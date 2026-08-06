@@ -9,3 +9,5 @@ Disallow: /configuracoes
 Disallow: /onboarding
 Disallow: /conectar
 Disallow: /api/
+
+Sitemap: https://juliusacessor.lovable.app/sitemap.xml

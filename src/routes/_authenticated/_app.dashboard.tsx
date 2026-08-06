@@ -30,6 +30,11 @@ export const Route = createFileRoute("/_authenticated/_app/dashboard")({
     meta: [
       { title: "Dashboard — Julius" },
       { name: "description", content: "Resumo das suas receitas, despesas e saldos financeiros em tempo real." },
+      { property: "og:title", content: "Dashboard financeiro — Julius" },
+      {
+        property: "og:description",
+        content: "Acompanhe receitas, despesas e saldo do período em gráficos atualizados em tempo real.",
+      },
     ],
   }),
   component: Dashboard,
@@ -127,7 +132,7 @@ function Dashboard() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Despesas por categoria</CardTitle>
+            <h2 className="text-base font-semibold leading-none">Despesas por categoria</h2>
           </CardHeader>
           <CardContent>
             {byCategory.length ? (
@@ -150,7 +155,7 @@ function Dashboard() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Receitas x Despesas por dia</CardTitle>
+            <h2 className="text-base font-semibold leading-none">Receitas x Despesas por dia</h2>
           </CardHeader>
           <CardContent>
             {byDay.length ? (
@@ -174,7 +179,7 @@ function Dashboard() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Gastos diários</CardTitle>
+          <h2 className="text-base font-semibold leading-none">Gastos diários</h2>
         </CardHeader>
         <CardContent>
           {byDay.some((d) => d.despesa > 0) ? (

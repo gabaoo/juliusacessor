@@ -13,6 +13,11 @@ export const Route = createFileRoute("/_authenticated/_app/conversas")({
     meta: [
       { title: "Conversas — Julius" },
       { name: "description", content: "Histórico das mensagens trocadas com o Julius pelo WhatsApp." },
+      { property: "og:title", content: "Histórico de conversas — Julius" },
+      {
+        property: "og:description",
+        content: "Consulte todas as mensagens trocadas com o Julius no WhatsApp, com busca e filtro por data.",
+      },
     ],
   }),
   component: Conversas,
