@@ -1,8 +1,10 @@
 export function exportToCsv(filename: string, rows: Record<string, unknown>[], headers?: { key: string; label: string }[]) {
   if (!rows.length) return;
   const cols = headers ?? Object.keys(rows[0]).map((k) => ({ key: k, label: k }));
+  // Neutralize spreadsheet formula injection: values starting with =, +, -, @, tab or CR
+  const neutralize = (s: string) => (/^[=+\-@\t\r]/.test(s) ? `'${s}` : s);
   const escape = (v: unknown) => {
-    const s = v === null || v === undefined ? "" : String(v);
+    const s = neutralize(v === null || v === undefined ? "" : String(v));
     if (/[",\n;]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
     return s;
   };
