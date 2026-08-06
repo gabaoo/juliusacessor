@@ -41,6 +41,11 @@ export const Route = createFileRoute("/_authenticated/_app/configuracoes")({
     meta: [
       { title: "Configurações — Julius" },
       { name: "description", content: "Gerencie sua conta, categorias, aparência e integração do Julius." },
+      { property: "og:title", content: "Configurações da conta — Julius" },
+      {
+        property: "og:description",
+        content: "Ajuste perfil, moeda, fuso horário, categorias e a integração com o WhatsApp.",
+      },
     ],
   }),
   component: Configuracoes,

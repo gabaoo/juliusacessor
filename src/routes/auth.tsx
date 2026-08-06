@@ -96,7 +96,7 @@ function AuthPage() {
             <Wallet className="h-7 w-7" />
           </div>
           <h1 className="mt-4 text-3xl font-bold tracking-tight">
-            JuliusSeu assessor financeiro pessoal no WhatsApp
+            Julius — Seu assessor financeiro pessoal no WhatsApp
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Entre para acessar seu painel e organizar suas finanças.

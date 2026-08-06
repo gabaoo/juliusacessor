@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-// Set this once a project name or custom domain is configured.
-const BASE_URL = "";
+const BASE_URL = "https://juliusacessor.lovable.app";
 
 interface SitemapEntry {
   path: string;
