@@ -77,6 +77,62 @@ export type Database = {
         }
         Relationships: []
       }
+      lancamentos_recorrentes: {
+        Row: {
+          ativo: boolean
+          categoria: string | null
+          created_at: string
+          descricao: string | null
+          dia_do_mes: number
+          id: string
+          instance_id: string
+          metodo_pagamento: string | null
+          tipo: string
+          ultimo_mes_gerado: string | null
+          updated_at: string
+          user_id: string
+          valor: number
+        }
+        Insert: {
+          ativo?: boolean
+          categoria?: string | null
+          created_at?: string
+          descricao?: string | null
+          dia_do_mes?: number
+          id?: string
+          instance_id: string
+          metodo_pagamento?: string | null
+          tipo?: string
+          ultimo_mes_gerado?: string | null
+          updated_at?: string
+          user_id: string
+          valor?: number
+        }
+        Update: {
+          ativo?: boolean
+          categoria?: string | null
+          created_at?: string
+          descricao?: string | null
+          dia_do_mes?: number
+          id?: string
+          instance_id?: string
+          metodo_pagamento?: string | null
+          tipo?: string
+          ultimo_mes_gerado?: string | null
+          updated_at?: string
+          user_id?: string
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lancamentos_recorrentes_instance_id_fkey"
+            columns: ["instance_id"]
+            isOneToOne: false
+            referencedRelation: "instances"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       messages: {
         Row: {
           conteudo: string | null
@@ -108,6 +164,72 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      metas_economia: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          data_alvo: string | null
+          id: string
+          titulo: string
+          updated_at: string
+          user_id: string
+          valor_alvo: number
+          valor_atual: number
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          data_alvo?: string | null
+          id?: string
+          titulo: string
+          updated_at?: string
+          user_id: string
+          valor_alvo?: number
+          valor_atual?: number
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          data_alvo?: string | null
+          id?: string
+          titulo?: string
+          updated_at?: string
+          user_id?: string
+          valor_alvo?: number
+          valor_atual?: number
+        }
+        Relationships: []
+      }
+      orcamentos: {
+        Row: {
+          categoria: string
+          created_at: string
+          id: string
+          recorrente: boolean
+          updated_at: string
+          user_id: string
+          valor_limite: number
+        }
+        Insert: {
+          categoria: string
+          created_at?: string
+          id?: string
+          recorrente?: boolean
+          updated_at?: string
+          user_id: string
+          valor_limite?: number
+        }
+        Update: {
+          categoria?: string
+          created_at?: string
+          id?: string
+          recorrente?: boolean
+          updated_at?: string
+          user_id?: string
+          valor_limite?: number
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -152,6 +274,7 @@ export type Database = {
           id: string
           instance_id: string
           metodo_pagamento: string | null
+          origem: string
           resposta_usuario: string | null
           tipo: string
           updated_at: string
@@ -166,6 +289,7 @@ export type Database = {
           id?: string
           instance_id: string
           metodo_pagamento?: string | null
+          origem?: string
           resposta_usuario?: string | null
           tipo: string
           updated_at?: string
@@ -180,6 +304,7 @@ export type Database = {
           id?: string
           instance_id?: string
           metodo_pagamento?: string | null
+          origem?: string
           resposta_usuario?: string | null
           tipo?: string
           updated_at?: string
@@ -197,9 +322,28 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      v_resumo_mensal_categoria: {
+        Row: {
+          categoria: string | null
+          instance_id: string | null
+          mes: string | null
+          qtd: number | null
+          tipo: string | null
+          total: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_instance_id_fkey"
+            columns: ["instance_id"]
+            isOneToOne: false
+            referencedRelation: "instances"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
+      gerar_lancamentos_recorrentes: { Args: never; Returns: number }
       owns_instance: { Args: { _instance_id: string }; Returns: boolean }
     }
     Enums: {
