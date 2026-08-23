@@ -41,6 +41,7 @@ export interface Transaction {
   hora: string | null;
   resposta_usuario: string | null;
   created_at: string;
+  origem?: string | null;
 }
 
 export interface Message {
