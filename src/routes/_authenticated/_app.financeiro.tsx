@@ -46,7 +46,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import type { Transaction } from "@/hooks/use-app-data";
 import { toast } from "sonner";
-import { Pencil, Trash2, Download } from "lucide-react";
+import { Pencil, Trash2, Download, Repeat } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/_app/financeiro")({
   head: () => ({
@@ -170,7 +170,17 @@ function Financeiro() {
                     <TableRow key={t.id}>
                       <TableCell className="tabular whitespace-nowrap">{formatDate(t.data)}</TableCell>
                       <TableCell className="tabular whitespace-nowrap">{formatTime(t.hora)}</TableCell>
-                      <TableCell>{t.categoria ?? "—"}</TableCell>
+                      <TableCell>
+                        <span className="flex items-center gap-1.5">
+                          {t.origem === "recorrente" && (
+                            <Repeat
+                              className="h-3.5 w-3.5 shrink-0 text-primary"
+                              aria-label="Lançamento recorrente"
+                            />
+                          )}
+                          {t.categoria ?? "—"}
+                        </span>
+                      </TableCell>
                       <TableCell>{t.metodo_pagamento ?? "—"}</TableCell>
                       <TableCell className="max-w-xs truncate">{t.descricao ?? "—"}</TableCell>
                       <TableCell

@@ -34,7 +34,11 @@ import {
   RefreshCw,
   Loader2,
   QrCode,
+  Target,
+  Repeat,
+  PiggyBank,
 } from "lucide-react";
+import { OrcamentosTab, RecorrentesTab, MetasTab } from "@/components/PlanningTabs";
 
 export const Route = createFileRoute("/_authenticated/_app/configuracoes")({
   head: () => ({
@@ -54,11 +58,14 @@ export const Route = createFileRoute("/_authenticated/_app/configuracoes")({
 const CURRENCIES = ["BRL", "USD", "EUR", "GBP"];
 const TIMEZONES = ["America/Sao_Paulo", "America/New_York", "Europe/London", "Europe/Lisbon", "UTC"];
 
-type Tab = "conta" | "categorias" | "integracao";
+type Tab = "conta" | "categorias" | "orcamentos" | "recorrentes" | "metas" | "integracao";
 
 const TABS: { id: Tab; label: string; icon: React.ElementType }[] = [
   { id: "conta", label: "Conta & Aparência", icon: User },
   { id: "categorias", label: "Categorias", icon: Tag },
+  { id: "orcamentos", label: "Orçamentos", icon: Target },
+  { id: "recorrentes", label: "Recorrentes", icon: Repeat },
+  { id: "metas", label: "Metas", icon: PiggyBank },
   { id: "integracao", label: "Integração", icon: Plug },
 ];
 
@@ -99,6 +106,9 @@ function Configuracoes() {
         <div className="flex-1 min-w-0">
           {activeTab === "conta" && <ContaTab />}
           {activeTab === "categorias" && <CategoriasTab />}
+          {activeTab === "orcamentos" && <OrcamentosTab />}
+          {activeTab === "recorrentes" && <RecorrentesTab />}
+          {activeTab === "metas" && <MetasTab />}
           {activeTab === "integracao" && <IntegracaoTab />}
         </div>
       </div>

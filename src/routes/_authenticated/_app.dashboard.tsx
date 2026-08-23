@@ -24,6 +24,8 @@ import {
   Area,
 } from "recharts";
 import { ArrowDownRight, ArrowUpRight, Wallet, Download, TrendingUp } from "lucide-react";
+import { InsightsPanel } from "@/components/InsightsPanel";
+import { BudgetsCard } from "@/components/BudgetsCard";
 
 export const Route = createFileRoute("/_authenticated/_app/dashboard")({
   head: () => ({
@@ -127,6 +129,11 @@ function Dashboard() {
           icon={<Wallet className="h-5 w-5" />}
           tone={totals.saldo >= 0 ? "income" : "expense"}
         />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <InsightsPanel instanceId={instance?.id} currency={currency} />
+        <BudgetsCard instanceId={instance?.id} currency={currency} />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
