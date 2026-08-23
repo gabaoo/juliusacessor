@@ -130,6 +130,11 @@ function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <InsightsPanel instanceId={instance?.id} currency={currency} />
+        <BudgetsCard instanceId={instance?.id} currency={currency} />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <h2 className="text-base font-semibold leading-none">Despesas por categoria</h2>
