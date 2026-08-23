@@ -46,7 +46,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import type { Transaction } from "@/hooks/use-app-data";
 import { toast } from "sonner";
-import { Pencil, Trash2, Download } from "lucide-react";
+import { Pencil, Trash2, Download, Repeat } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/_app/financeiro")({
   head: () => ({
