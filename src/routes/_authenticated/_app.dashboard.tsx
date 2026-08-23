@@ -24,6 +24,8 @@ import {
   Area,
 } from "recharts";
 import { ArrowDownRight, ArrowUpRight, Wallet, Download, TrendingUp } from "lucide-react";
+import { InsightsPanel } from "@/components/InsightsPanel";
+import { BudgetsCard } from "@/components/BudgetsCard";
 
 export const Route = createFileRoute("/_authenticated/_app/dashboard")({
   head: () => ({
