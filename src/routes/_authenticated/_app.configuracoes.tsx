@@ -106,6 +106,9 @@ function Configuracoes() {
         <div className="flex-1 min-w-0">
           {activeTab === "conta" && <ContaTab />}
           {activeTab === "categorias" && <CategoriasTab />}
+          {activeTab === "orcamentos" && <OrcamentosTab />}
+          {activeTab === "recorrentes" && <RecorrentesTab />}
+          {activeTab === "metas" && <MetasTab />}
           {activeTab === "integracao" && <IntegracaoTab />}
         </div>
       </div>
