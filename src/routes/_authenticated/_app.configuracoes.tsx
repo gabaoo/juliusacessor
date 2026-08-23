@@ -34,7 +34,11 @@ import {
   RefreshCw,
   Loader2,
   QrCode,
+  Target,
+  Repeat,
+  PiggyBank,
 } from "lucide-react";
+import { OrcamentosTab, RecorrentesTab, MetasTab } from "@/components/PlanningTabs";
 
 export const Route = createFileRoute("/_authenticated/_app/configuracoes")({
   head: () => ({
